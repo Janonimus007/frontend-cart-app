@@ -1,6 +1,9 @@
 import React from 'react'
 
-export const CatalogItem = ({name,description,price}) => {
+export const CatalogItem = ({id,name,description,price}) => {
+    const onAddProduct =(product)=>{
+        
+    }
   return (
     <>
         <div className='card'>
@@ -12,7 +15,10 @@ export const CatalogItem = ({name,description,price}) => {
                     {description}
                 </p>
                 <p>${price}</p>
-                <button className='btn btn-primary'>Agregar</button>
+                <button
+                 className='btn btn-primary'
+                 onClick={()=>onAddProduct({id,name,description,price})}
+                 >Agregar</button>
 
             </div>
         </div>
