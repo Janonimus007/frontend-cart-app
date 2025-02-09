@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const CatalogItem = ({id,name,description,price}) => {
+export const CatalogItem = ({id,name,description,price,handler}) => {
     const onAddProduct =(product)=>{
-        
+        handler(product)
     }
   return (
     <>

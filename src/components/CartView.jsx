@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { calculateTotal } from '../services/productService'
 
-export const CartView = ({items}) => {
+export const CartView = ({items,handlerDelete}) => {
+    const [total, setTotal] = useState(0)
+    const onDeleteProduct = (id)=>{
+        handlerDelete(id)
+    }
+    useEffect(() => {
+        setTotal(
+           calculateTotal(items)
+        )
+    }, [items])
+    
   return (
     <>
         <h3>Carrito de compra</h3>
@@ -22,7 +33,9 @@ export const CartView = ({items}) => {
                             <td>{item.product.price}</td>
                             <td>{item.quantity}</td>
                             <td>{item.quantity  * item.product.price}</td>
-                            <td>Eliminar</td>
+                            <td><button 
+                                className='btn btn-danger'
+                                onClick={()=>onDeleteProduct(item.product.id)}>Eliminar</button></td>
                         </tr>                        
                     ))
                 }
@@ -30,8 +43,8 @@ export const CartView = ({items}) => {
             </tbody>
             <tfoot>
                 <tr>
-                    <td colSpan={3} className='text-right font-weight-bold'>sdffd</td>
-                    <td colSpan={2} className='text-left font-weight-bold'>sdffsd</td>
+                    <td colSpan={3} className='text-right font-weight-bold'>TOTAL</td>
+                    <td colSpan={2} className='text-left font-weight-bold'>{total}</td>
                 </tr>
             </tfoot>
         </table>
